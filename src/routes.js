@@ -10,7 +10,7 @@ const BookingController = require("./controlers/BookingController");
 const routes = express.Router();
 const upload = multer(uploadConfig);
 
-
+routes.get("/sessions", SessionController.findUserByEmail);
 routes.post("/sessions", SessionController.create);
 
 routes.get("/spots", SpotController.list);
