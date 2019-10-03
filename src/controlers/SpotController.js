@@ -1,17 +1,8 @@
 const Spot = require("../models/Spot");
 const User = require("../models/User");
 
-// index, show, store, update, destroy
-// list, getById, Create, Update, delete
-
 module.exports = {
-  //trear different cases with lowercase or upper case
-  async list(req, res) {
-    const { tech } = req.query;
-    const spots = await Spot.find({techs: tech});
-
-    return res.json(spots);
-  },
+  
   async create(req, res) {
     const { filename } = req.file;
     const { company, techs, price } = req.body;
@@ -32,5 +23,26 @@ module.exports = {
     })
   
     return res.json(spot);
-  }
+  },
+
+  async list(req, res) {
+    const spots = await Spot.find();
+
+    return res.json(spots);
+  },
+
+  async listByTechs(req, res) {
+    const { tech } = req.query;
+    const spots = await Spot.find({techs: tech});
+
+    return res.json(spots);
+  },
+
+  async listByUser(req, res) {
+    const { user_id } = req.headers;
+    const spots = await Spot.find({createdBy: user_id});
+
+    return res.json(spots);
+  },
+
 };

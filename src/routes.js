@@ -4,7 +4,6 @@ const uploadConfig = require('./config/upload')
 
 const SessionController = require("./controlers/SessionController");
 const SpotController = require("./controlers/SpotController");
-const DashboardController = require("./controlers/DashboardController");
 const BookingController = require("./controlers/BookingController");
 
 const routes = express.Router();
@@ -15,9 +14,8 @@ routes.post("/sessions", SessionController.create);
 
 routes.get("/spots", SpotController.list);
 routes.post("/spots", upload.single('thumbnail'), SpotController.create);
-
-routes.get("/dashboard", DashboardController.getSpotsByUserId);
-
+routes.get("/spots/listByTechs", SpotController.listByTechs);
+routes.get("/spots/listByUser", SpotController.listByUser);
 routes.post('/spots/:spot_id/bookings', BookingController.create);
 
 
